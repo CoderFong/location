@@ -57,6 +57,7 @@
     
     __weak typeof (self) weakSelf = self;
     PBLocationModel *model = [[PBLocationModel alloc] init];
+    model.currentLocation = location;
     [self.geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         CLPlacemark *placemark=[placemarks firstObject];
         model.locatedAddress = placemark.addressDictionary;
