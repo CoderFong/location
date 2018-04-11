@@ -42,10 +42,18 @@
         }
         [self.manager startUpdatingLocation];
         return;
+    }else {
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"打开定位开关" message:@"请点击设置打开定位服务" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"设置", nil];
+        [alertView show];
     }
-    [self stopLocation];
-    if (self.addressBlock) {
-        self.addressBlock(NO,nil);
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) {
+        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
+        }
     }
 }
 
